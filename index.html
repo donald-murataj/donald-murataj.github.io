@@ -15,11 +15,12 @@
 </head>
 <body class="text-gray-800 font-sans leading-relaxed">
     <!-- Header Section -->
-    <header class="bg-blue-600 bg-opacity-96 text-white p-4 flex items-center justify-between">
+    <header class="bg-blue-600 text-white p-4 flex items-center justify-between sticky top-0 z-10">
         <div class="flex items-center space-x-4">
             <img src="rectanglestartanalytics.png" alt="Rectangle Start Analytics Logo"
                  class="w-24 h-auto border-2 border-yellow-500 rounded">
-            <h1 class="text-2xl font-bold">Beginner's Guide to Discord Bots</h1>
+            <!-- Hide title on mobile devices -->
+            <h1 class="text-2xl font-bold hidden md:block">Beginner's Guide to Discord Bots</h1>
         </div>
         <a href="https://www.linkedin.com/in/donaldmurataj/" target="_blank"
            class="bg-yellow-500 text-blue-600 px-4 py-2 rounded hover:bg-yellow-400 transition">
@@ -39,7 +40,7 @@
             <li>Click on the <strong>"New Application"</strong> button in the top-right corner.</li>
             <li>Give your application a name (e.g., "My First Bot") and click <strong>"Create"</strong>.</li>
             <li>Navigate to the <strong>"General Information"</strong> tab in the left-hand menu. Update the information as needed (e.g., application description, icon, etc.), then click <strong>"Save Changes"</strong>. Below is an image for reference:</li>
-            <li><img src="general_information.png" alt="General Information" class="w-full mt-4 mb-6"></li>
+            <img src="general_information.png" alt="General Information" class="w-half mt-4 mb-6">
             <li>Next, navigate to the <strong>"Bot"</strong> tab in the left-hand menu.</li>
             <li>Click <strong>"Add Bot"</strong> and confirm the action by clicking <strong>"Yes, do it!"</strong>.</li>
         </ol>
@@ -72,22 +73,25 @@ DISCORD_TOKEN=your_discord_bot_token
 
         <h3 class="text-xl font-semibold text-blue-500 mb-2">Create the Python Script</h3>
         <p class="mb-6">Create a file named <code class="bg-gray-200 px-1 rounded">bot.py</code> in your project directory. Add the following code to turn on your bot:</p>
-        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6"><code>import os
-from dotenv import load_dotenv
-import discord
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+            <code class="whitespace-pre-wrap">
+                import os
+                from dotenv import load_dotenv
+                import discord
 
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+                load_dotenv()
+                TOKEN = os.getenv('DISCORD_TOKEN')
 
-intents = discord.Intents.default()
-client = discord.Client(intents=intents)
+                intents = discord.Intents.default()
+                client = discord.Client(intents=intents)
 
-@client.event
-async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+                @client.event
+                async def on_ready():
+                    print(f'{client.user} has connected to Discord!')
 
-client.run(TOKEN)
-        </code></pre>
+                client.run(TOKEN)
+            </code>
+        </pre>
 
         <h2 class="text-2xl font-semibold text-blue-600 mb-2">Run the Bot</h2>
         <p class="mb-6">Run the <code class="bg-gray-200 px-1 rounded">bot.py</code> script from PyCharm. You should see a message in the console confirming your bot is connected to Discord.</p>
