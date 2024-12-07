@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
             <h1 class="text-2xl font-bold hidden md:block">Beginner's Guide to Discord Bots</h1>
         </div>
         <a href="https://www.linkedin.com/in/donaldmurataj/" target="_blank"
-           class="bg-yellow-500 text-blue-600 px-4 py-2 rounded hover:bg-yellow-400 transition">
+           class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-400 transition">
             Contact Me
         </a>
     </header>
@@ -31,7 +31,7 @@
     <!-- Main Content -->
     <div class="max-w-4xl mx-auto p-6 bg-white bg-opacity-96 rounded-lg shadow-md mt-10">
         <h1 class="text-3xl font-bold text-blue-600 mb-4">Beginner's Guide to Creating a Discord Bot</h1>
-        <p class="mb-6">This tutorial will guide you through creating your first Discord bot. We assume you have Python installed and are using an IDE like <strong>PyCharm</strong>. If not, ensure you have Python installed from the <a href="https://www.python.org/downloads/" class="text-blue-500 underline" target="_blank">official Python site</a>.</p>
+        <p class="mb-6">This tutorial will guide you through creating your first Discord bot. We assume you have Python installed and are using an IDE like <a href="https://www.jetbrains.com/pycharm/" class="text-blue-500 underline" target="_blank">PyCharm</a>. If not, ensure you have Python installed from the <a href="https://www.python.org/downloads/" class="text-blue-500 underline" target="_blank">official Python site</a>.</p>
 
         <h2 class="text-2xl font-semibold text-blue-600 mb-2">Step 1: Set Up a Discord App</h2>
         <ol class="list-decimal list-inside mb-6">
@@ -41,65 +41,123 @@
             <li>Give your application a name (e.g., "My First Bot") and click <strong>"Create"</strong>.</li>
             <li>Navigate to the <strong>"General Information"</strong> tab in the left-hand menu. Update the information as needed (e.g., application description, icon, etc.), then click <strong>"Save Changes"</strong>. Below is an image for reference:</li>
             <img src="general_information.png" alt="General Information" class="w-half mt-4 mb-6">
-            <li>Next, navigate to the <strong>"Bot"</strong> tab in the left-hand menu.</li>
-            <li>Click <strong>"Add Bot"</strong> and confirm the action by clicking <strong>"Yes, do it!"</strong>.</li>
+            <li>Next, navigate to the <strong>"Bot"</strong> tab in the left-hand menu. Then scroll down to turn on <strong>"MESSAGE CONTENT INTENT"</strong> as this what allows your bot to access messages sent in a server. Don't forget to hit save.</li>
+            <img src="messagecontentintent.png" alt="Message Content Photo" class="w-half mt-4 mb-6">
         </ol>
-
-        <h3 class="text-xl font-semibold text-blue-500 mb-2">Setting Permissions</h3>
-        <p class="mb-6">Under the bot settings, scroll down to "Privileged Gateway Intents" and enable the <strong>Message Content Intent</strong> if you plan to read messages. Save your changes.</p>
 
         <h2 class="text-2xl font-semibold text-blue-600 mb-2">Step 2: Invite the Bot to Your Server</h2>
         <ol class="list-decimal list-inside mb-6">
-            <li>Go to the <strong>"OAuth2"</strong> tab in your Discord Developer Portal.</li>
-            <li>Click on <strong>"URL Generator"</strong>.</li>
-            <li>Under <strong>Scopes</strong>, select <code class="bg-gray-200 px-1 rounded">bot</code>.</li>
-            <li>Under <strong>Bot Permissions</strong>, choose permissions your bot needs (e.g., <code class="bg-gray-200 px-1 rounded">Send Messages</code>).</li>
-            <li>Copy the generated URL at the bottom of the page.</li>
-            <li>Paste the URL into your browser and select a server where you have permission to add bots.</li>
-            <li>Authorize the bot and complete the CAPTCHA.</li>
+            <li>Next, navigate to the <strong>"OAuth2"</strong> tab in the left-hand menu and enter the section <strong>"URL Generator"</strong>. Let's invite the bot to your discord server with a set of permissions by selecting <strong>"bot"</strong> in the <strong>"Scope"</strong> section.</li>
+            <img src="botscope.png" alt="bot scope Photo" class="w-half mt-4 mb-6">
+            <li>For now, we are only interested in 3 permissions, which are <strong>"Send Messages"</strong>, <strong>"View Channels"</strong> and <strong>"Read Message History".</strong></li>
+            <img src="botpermissions.png" alt="bot permissions Photo" class="w-half mt-4 mb-6">
+            <li>Scroll down to the <strong>Generated URL</strong>. Copy it and paste it into a new tab on your browser, this will invite the discord bot to the server that you choose.</li>
+            <img src="addbottoserver.png" alt="add bot to server Photo" class="w-half mt-4 mb-6">
+            <li>Authorize the bot and complete the CAPTCHA. When that is done, you should see your bot listed as offline in your server.</li>
+            <img src="offlinebot.png" alt="Offline Bot Photo" class="w-half mt-4 mb-6">
+
         </ol>
 
         <h2 class="text-2xl font-semibold text-blue-600 mb-2">Step 3: Setting Up the Project</h2>
         <h3 class="text-xl font-semibold text-blue-500 mb-2">Create a New Python Project</h3>
-        <p class="mb-6">Open PyCharm and create a new Python project. Install the required library <code class="bg-gray-200 px-1 rounded">discord.py</code> by running:</p>
-        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6"><code>pip install discord.py</code></pre>
+        <p class="mb-6">Open <a href="https://www.jetbrains.com/pycharm/" class="text-blue-500 underline" target="_blank">PyCharm</a> or whatever python IDE that you use and create a new Python project. Install the required library <code class="bg-gray-200 px-1 rounded">discord.py</code> by going to your terminal and running:</p>
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+pip install discord
+        </pre>
+        <img src="pipinstalldiscord.png" alt="Install Discord Photo" class="w-half mt-4 mb-6">
 
+        <p class="mb-6">You will also need to install the dotenv library if you don't already have it. This allows you to load into your python program any private things like passwords and tokens that you have saved in a .env file.</p>
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+pip install python-dotenv
+        </pre>
         <h3 class="text-xl font-semibold text-blue-500 mb-2">Create a .env File</h3>
         <p class="mb-6">In your project directory, create a new file called <code class="bg-gray-200 px-1 rounded">.env</code> to store your bot token securely:</p>
-        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6">
-DISCORD_TOKEN=your_discord_bot_token
+        <img src="env.png" alt="env Photo" class="w-half mt-4 mb-6">
+        <p class="mb-6">Go back to your <a href="https://discord.com/developers/applications" class="text-blue-500 underline" target="_blank">Discord Developer Portal</a> and inside your app, go back into the <strong>"Bot"</strong> tab where you will generate a token to uniquely identify your bot. You do this by pressing the <strong>"Reset Token"</strong> button.</p>
+        <img src="resettoken.png" alt="Reset Token Photo" class="w-half mt-4 mb-6">
+        <p class="mb-6">Then copy and paste this token into your .env using the syntax: </p>
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+TOKEN = your_discord_bot_token
         </pre>
-        <p class="mb-6">Replace <code class="bg-gray-200 px-1 rounded">your_discord_bot_token</code> with the bot token found in the "Bot" tab of your Discord Developer Portal.</p>
+        <img src="pastetoken.png" alt="Pasted Token Photo" class="w-half mt-4 mb-6">
 
         <h3 class="text-xl font-semibold text-blue-500 mb-2">Create the Python Script</h3>
-        <p class="mb-6">Create a file named <code class="bg-gray-200 px-1 rounded">bot.py</code> in your project directory. Add the following code to turn on your bot:</p>
+        <p class="mb-6">Create a file named <code class="bg-gray-200 px-1 rounded">bot.py</code> in your project directory. Add the following code to check if all libraries were installed and the token loads correctly.</p>
         <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
-            <code class="whitespace-pre-wrap">
-                import os
-                from dotenv import load_dotenv
-                import discord
+import discord
+import dotenv
+import os
 
-                load_dotenv()
-                TOKEN = os.getenv('DISCORD_TOKEN')
-
-                intents = discord.Intents.default()
-                client = discord.Client(intents=intents)
-
-                @client.event
-                async def on_ready():
-                    print(f'{client.user} has connected to Discord!')
-
-                client.run(TOKEN)
-            </code>
+dotenv.load_dotenv()
+my_bot_token = os.getenv('TOKEN')
+print(my_bot_token)
         </pre>
+        <p class="mb-6">Running this code should successfully print out your discord token in the terminal. If you get an error, please chatGPT or google how to fix that error. The next step is to create an instance of the discord bot with a new set of intents.</p>
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+intents = discord.Intents.default()
+intents.message_content = True
+bot = discord.Client(intents=intents)
+        </pre>
+        <p class="mb-6">Now you want to define your first bot event which is <strong>on_ready</strong>. This is where you tell you program what to do when the bot turns on. Let's just tell it to print the bot's name in the terminal.</p>
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+@bot.event
+async def on_ready():
+    print(f'{bot.user} is ready')
+        </pre>
+        <p class="mb-6">We still haven't called function to run the bot, so it won't turn on just yet. To get the bot to turn on, we must add the following line of code to the end of our file.</p>
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+bot.run(my_bot_token)
+        </pre>
+        <p class="mb-6">Now try running the code. Check the messages in the terminal that will tell you when your bot is ready. After that, if you go to your discord server, you will see that the bot is online.</p>
+        <img src="onlinebot.png" alt="Online Photo" class="w-half mt-4 mb-6">
+        <p class="mb-6">In its current state all the bot can do is turn on, let's get it to at least respond to messages. Let's add another discord event for <strong>on_message</strong>. This will have to come before <strong>bot.run(my_bot_token)</strong>.</p>
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+@bot.event
+# This functions tells the bot what to do when there is a new message in the channel
+async def on_message(message):
+    # Don't do anything, if the message sent was by the bot itself
+    if message.author == bot.user:
+        return
 
-        <h2 class="text-2xl font-semibold text-blue-600 mb-2">Run the Bot</h2>
-        <p class="mb-6">Run the <code class="bg-gray-200 px-1 rounded">bot.py</code> script from PyCharm. You should see a message in the console confirming your bot is connected to Discord.</p>
+    await message.channel.send("Hello")
+        </pre>
+        <p class="mb-6">Now your overall code should look as follows.</p>
+        <pre class="bg-gray-100 p-4 rounded shadow-inner mb-6 overflow-x-auto">
+import discord
+import dotenv
+import os
 
+dotenv.load_dotenv()
+my_bot_token = os.getenv('TOKEN')
+# You can delete this print statement as it was just to check that the token loads
+print(my_bot_token)
+
+intents = discord.Intents.default()
+intents.message_content = True
+bot = discord.Client(intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user} is ready')
+
+@bot.event
+# This functions tells the bot what to do when there is a new message in the channel
+async def on_message(message):
+    # Don't do anything, if the message sent was by the bot itself
+    if message.author == bot.user:
+        return
+
+    await message.channel.send("Hello")
+
+bot.run(my_bot_token)
+        </pre>
+        <h2 class="text-2xl font-semibold text-blue-600 mb-2">Run the Bot.</h2>
+        <p class="mb-6">Now when you type anything into the discord chat, the bot will respond with <strong>"Hello"</strong>.</p>
+        <img src="hello.png" alt="Hello Photo" class="w-half mt-4 mb-6">
         <h2 class="text-2xl font-semibold text-blue-600 mb-2">Next Steps</h2>
-        <p>Now that your bot is online, you can start adding more functionality! Check out the <a href="https://discordpy.readthedocs.io/" class="text-blue-500 underline" target="_blank">discord.py documentation</a> for more advanced features.</p>
+        <p>Now that your bot is online and can at least respond to messages, you can start adding more functionality! Check out the <a href="https://discordpy.readthedocs.io/" class="text-blue-500 underline" target="_blank">discord.py documentation</a> for more advanced features.</p>
 
-        <p class="text-gray-700 mt-6">Happy coding!</p>
+        <p class="text-gray-700 mt-6">Please reach out using the contact button at the top right corner if you have any questions!</p>
     </div>
 </body>
 </html>
